@@ -1,7 +1,6 @@
 'use strict';
 
-var debug = require('debug')('koa-ws-cookie-helper'),
-    Keygrip = require('keygrip');
+var Keygrip = require('keygrip');
 
 /**
  *  Get cookie from a WebSocket's upgraded request.

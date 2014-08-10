@@ -2,28 +2,31 @@
   "name": "koa-ws-cookie-helper",
   "description": "koa.js + ws.js cookie helper",
   "repository": "anilanar/koa-ws-cookie-helper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [
     "koa",
     "ws",
     "session",
     "cookie"
   ],
+  "main": "index.js",
   "files": [
-    "index.js"
+    "index.js",
+    "test.js",
+    "example.js",
+    "Makefile",
+    "Readme.md"
   ],
-  "devDependencies": {
+  "dependencies": {
     "koa": "*",
     "ws": "*",
-    "keygrip": "*",
-    "mocha": "*",
+    "keygrip": "*"
+  },
+  "devDependencies": {
     "chai": "*",
-    "supertest": "*"
+    "mocha": "*"
   },
   "license": "MIT",
-  "dependencies": {
-    "debug": "*"
-  }, 
   "scripts": {
     "test": "make test"
   }
