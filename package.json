@@ -18,9 +18,9 @@
     "Readme.md"
   ],
   "dependencies": {
-    "koa": "*",
-    "ws": "*",
-    "keygrip": "*"
+    "koa": "0.9.x",
+    "ws": "0.4.x",
+    "keygrip": "~1"
   },
   "devDependencies": {
     "chai": "*",
