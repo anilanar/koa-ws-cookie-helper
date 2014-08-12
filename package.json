@@ -30,7 +30,6 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": "make test",
-    "test-cov": "make test-cov"
+    "test": "make test-cov"
   }
 }
