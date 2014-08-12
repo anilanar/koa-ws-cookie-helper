@@ -24,10 +24,13 @@
   },
   "devDependencies": {
     "chai": "*",
-    "mocha": "*"
+    "mocha": "*",
+    "coveralls": "*",
+    "istanbul": "*"
   },
   "license": "MIT",
   "scripts": {
-    "test": "make test"
+    "test": "make test",
+    "test-cov": "make test-cov"
   }
 }
