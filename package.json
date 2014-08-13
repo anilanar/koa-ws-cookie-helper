@@ -2,7 +2,7 @@
   "name": "koa-ws-cookie-helper",
   "description": "koa.js + ws.js cookie helper",
   "repository": "anilanar/koa-ws-cookie-helper",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "keywords": [
     "koa",
     "ws",

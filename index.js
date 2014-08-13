@@ -24,8 +24,13 @@ module.exports.get = function (ws, name, keys) {
   if(!signedCookie) return;
 
   var keygrip;
-  if(Array.isArray(keys))
+  if(Array.isArray(keys)) {
+    for(var i = 0; i < keys.length; i++) {
+      if(!(typeof keys[i] == 'string' || keys[i] instanceof String))
+        return;
+    }
     keygrip = new Keygrip(keys);
+  }
   else if(keys.constructor && keys.constructor.name === 'Keygrip')
     keygrip = keys;
   else 

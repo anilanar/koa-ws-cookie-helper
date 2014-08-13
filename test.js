@@ -10,8 +10,8 @@ var koa = require('koa'),
 var port = 8000;
 var cookieName = 'foo';
 var cookieValue = 'bar';
-var keys = ['secret'];
-var keygrip = Keygrip(keys);
+var keysAsArray = ['secret'];
+var keygrip = Keygrip(keysAsArray);
 
 var cookie = new Cookie('foo', 'bar');
 var signedCookie = new Cookie('foo.sig', keygrip.sign(cookie.toString()));
@@ -56,7 +56,7 @@ describe('koa-ws-cookie-helper', function () {
     });
 
     describe('when cookie with the name exists', function () {
-      describe('when keys are not provided', function () {
+      describe('when no keys provided', function () {
         it('should return cookie value', function (done) {
           onConnection(wss, function (client) {
             var res = cookies.get(client, cookie.name);
@@ -66,42 +66,70 @@ describe('koa-ws-cookie-helper', function () {
         });
       });
 
-      describe('when keys are provided', function () {
-        describe('when signed cookie does not exist', function () {
-          it('should return undefined', function (done) {
-            onConnection(wss, function (client) {
-              var res = cookies.get(client, cookieWithoutSig.name, keys);
-              should.not.exist(res);
-            }, done);
-            createConnection(cookieHeader);
-          });
+      describe('when provided keys object is neither array nor keygrip object', function () {
+        it('should return undefined', function (done) {
+          onConnection(wss, function (client) {
+            var res = cookies.get(client, cookie.name, {});
+            should.not.exist(res);
+          }, done);
+          createConnection(cookieHeader);  
         });
+      });
 
-        describe('when signed cookie does not match', function () {
-          it('should return undefined', function (done) {
-            onConnection(wss, function (client) {
-              var res = cookies.get(client, cookieWithFaultySig.name, keys);
-              should.not.exist(res);
-            }, done);
-            createConnection(cookieHeader);
-          });
+      describe('when provided keys object is not array of strings', function () {
+        it('should return undefined', function (done) {
+          onConnection(wss, function (client) {
+            var res = cookies.get(client, cookie.name, [1, function () {}]);
+            should.not.exist(res);
+          }, done);
+          createConnection(cookieHeader);
         });
+      });
 
-        describe('when signed cookie exists and matches', function () {
-          it('should return cookie value', function (done) {
-            onConnection(wss, function (client) {
-              var res = cookies.get(client, cookie.name, keys);
-              res.should.be.eql(cookie.val);
-            }, done);
-            createConnection(cookieHeader);
-          });
-        });
+      describe('when keys object is array', function () {
+        testAfterAllConditionsAreMet(wss, keysAsArray);
+      });
+
+      describe('when keys object is Keygrip object', function () {
+        testAfterAllConditionsAreMet(wss, keygrip);
       });
     });
   });
 
   wss.close();
 });
+
+function testAfterAllConditionsAreMet (wss, keys) {
+  describe('when signed cookie does not exist', function () {
+    it('should return undefined', function (done) {
+      onConnection(wss, function (client) {
+        var res = cookies.get(client, cookieWithoutSig.name, keys);
+        should.not.exist(res);
+      }, done);
+      createConnection(cookieHeader);
+    });
+  });
+
+  describe('when signed cookie does not match', function () {
+    it('should return undefined', function (done) {
+      onConnection(wss, function (client) {
+        var res = cookies.get(client, cookieWithFaultySig.name, keys);
+        should.not.exist(res);
+      }, done);
+      createConnection(cookieHeader);
+    });
+  });
+
+  describe('when signed cookie exists and matches', function () {
+    it('should return cookie value', function (done) {
+      onConnection(wss, function (client) {
+        var res = cookies.get(client, cookie.name, keys);
+        res.should.be.eql(cookie.val);
+      }, done);
+      createConnection(cookieHeader);
+    });
+  });
+}
 
 function createConnection(cookie) {
   var host = 'ws://localhost:' + port;
