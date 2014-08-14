@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/anilanar/koa-ws-cookie-helper.svg?branch=master)](https://travis-ci.org/anilanar/koa-ws-cookie-helper) [![Coverage Status](https://coveralls.io/repos/anilanar/koa-ws-cookie-helper/badge.png?branch=master)](https://coveralls.io/r/anilanar/koa-ws-cookie-helper?branch=master)
+[![NPM version](https://badge.fury.io/js/koa-ws-cookie-helper.svg)](http://badge.fury.io/js/koa-ws-cookie-helper)
 
 #koa-ws-cookie-helper
 
