@@ -18,11 +18,11 @@
     "Readme.md"
   ],
   "dependencies": {
-    "koa": "0.9.x",
-    "ws": "0.4.x",
     "keygrip": "~1"
   },
   "devDependencies": {
+    "koa": "0.9.x",
+    "ws": "0.4.x",
     "chai": "*",
     "mocha": "*",
     "coveralls": "*",
