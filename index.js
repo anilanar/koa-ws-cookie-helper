@@ -13,7 +13,7 @@ var Keygrip = require('keygrip');
  */
 module.exports.get = function (ws, name, keys) {
   var sigName = name + '.sig';
-  var cookies = ws.upgradeReq.headers.cookie;
+  var cookies = ws.handshake.headers.cookie;
   if(!cookies) return;
   var match = cookies.match(getPattern(name));
   if(!match) return;
